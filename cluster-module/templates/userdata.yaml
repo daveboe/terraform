@@ -1,0 +1,181 @@
+#cloud-config
+users:
+  - name: management
+    ssh_authorized_keys:
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEyQZw78mHlFl3jad2kwtY/9BP52M5ymbQhRPXZc0gGM
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    groups: sudo
+    shell: /bin/bash
+  - name: svcaxbscnessus
+    ssh_authorized_keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDwKxyPR7TaXprCiJESFtsiiq8ozs8tsvl5mBtrKPzVWOjur2hW0iPZp8TiS0JiJ9njblgsbHIFdLm0Xe4d6RwY8/oFJMjsizT7CySIVXzcSNip902kM4JBzh3nbD64q11bkAD73eryYQzlNIWFytPRq9TCngsU46XRFXvn9QzbDGKysMRA93odoI0n9wiKNFcj/EbV2IH473+Il6LU4uSETyklFqkHtjPiV+xQP72Lk0Zw6UdeEKDyhJGiCjeWZIhUHf8OcXfdmo9D3fsLo+YJ2NWD5/Gz/Z6gX5EhJ9ymmKqQgSz3JxAeGild75BuZ0oxdEv7dH+LNiSDJd3KC7IpqKiOTvXNsapFTnOaa4udbXIZFeRWbWPLrdKvQRUFKSERqQ+rW9e0DSJibDLtLKHef2+TRV3cQjtBL5zZgqLPv882rYF5yhfRaNsBopnhqGG0yWGy4cUY8wvkmKR5lgi74Sy76s0q86ax/kVXbllndvxCotOoHHDLYW/JrLa0aZM=
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    groups: sudo
+  - name: terraform
+    ssh_authorized_keys:
+      - ecdsa-sha2-nistp521 AAAAE2VjZHNhLXNoYTItbmlzdHA1MjEAAAAIbmlzdHA1MjEAAACFBAEOnF/gD4w39jvuZH8A+ImhWuRfQm7i9xNKkJ6HsbTr+hUx4LirrOn5Y+nfdzfWaDmotJm0xA8qsAwF9sxBXQunMgEgkT27Yz6nnPSbDMzGPCsC6M/8HwY0+0EJmYAfMZwAhH9g4tAxaIyxqfUk/CULrQrnQ0og/Y4LnzulM5bny7w9JA==
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    groups: sudo
+
+write_files:
+- encoding: b64
+  content: "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURpRENDQW5DZ0F3SUJBZ0lCQ\
+  URBTkJna3Foa2lHOXcwQkFRVUZBREI0TVFzd0NRWURWUVFHRXdKRFNERU8KTUF3R0ExVUVDQk1G\
+  VTBjdFdrZ3hEakFNQmdOVkJBY1RCVk5ITFZwSU1SNHdIQVlEVlFRS0V4VkJZbkpoZUdGegpJRWx\
+  1Wm05eWJXRjBhV3NnUVVjeEZ6QVZCZ05WQkFzVERsTlRUeTFDUVZNdFUwVkRVMWxUTVJBd0RnWU\
+  RWUVFECkV3ZHdjbTk0ZVhkbk1CNFhEVEE1TVRBeE9URTJNRFF6TjFvWERUSTVNVEF4T1RFMk1EU\
+  XpOMW93ZURFTE1Ba0cKQTFVRUJoTUNRMGd4RGpBTUJnTlZCQWdUQlZOSExWcElNUTR3REFZRFZR\
+  UUhFd1ZUUnkxYVNERWVNQndHQTFVRQpDaE1WUVdKeVlYaGhjeUJKYm1admNtMWhkR2xySUVGSE1\
+  SY3dGUVlEVlFRTEV3NVRVMDh0UWtGVExWTkZRMU5aClV6RVFNQTRHQTFVRUF4TUhjSEp2ZUhsM1\
+  p6Q0NBU0l3RFFZSktvWklodmNOQVFFQkJRQURnZ0VQQURDQ0FRb0MKZ2dFQkFLUk9CVXZFclQ4S\
+  nU3anl2RUQyRmRhSDdPY3VSOC9laWdxVTJpNkNGNW5HZ0o1eFc0RnVZVEtRTDgrVAovNUdRU1Zr\
+  SWFKbWlqODlFUElWUnllb0lLVUw0WURJaXpLQ1ZKcjA5Tzk2aHJwaEh1YU12YytDenpNNEorcWJ\
+  aCnRvajdhcXdUYzBDWWdJemxyM2RsSjRBbWJsVWViQTNVQ2F4QlNLY0NXaExDVEU5VS9nT09IYm\
+  R5R1lmM0p2WmQKbklLK3JRcndwV290SGE0RytGYkNVMUVOSDdpQTZkZ2NkaCtjbWc5dmUxNFowc\
+  mtWM01oREtpQWdoTkNtRitLMApFZWpINzM3anlaQXo1YVNIc0haN1RDdENHOWQ4MThHTjVlbXZt\
+  YlZPd05RMFlJVDY5enN3QUdCN1o4VDdueGpKCmxjTElDMnIxbkdlMWx6THZjMXYrMk45clU2Y0N\
+  Bd0VBQWFNZE1Cc3dEQVlEVlIwVEJBVXdBd0VCL3pBTEJnTlYKSFE4RUJBTUNBUVl3RFFZSktvWk\
+  lodmNOQVFFRkJRQURnZ0VCQUU0RGRhUEJjNkdSYWU0aDFtRGgrang3bS9NOQpabGRiLzJVV1Qwb\
+  Wlod1lsWlZOUXVZS2dmWnNOYkd4S1h0U1E2YlFUVnl2L2xHVkErQjk3dzdLa0g5Y2VWQ0JiCnBE\
+  T25IQWJqMnZvTzdTRG1GbEtJSHlzWjlMWUh6NVFTckxsTGRTL3pjNVlRV2hOME1vbzNrU05PQ0N\
+  5czdZVEYKOW9ubDdVeWVVbE9JUzVld0dFVm1ucXVvT2w0SlZVOWY3L1NlR0pLTCtzVlJXcEFYMF\
+  FzbHRVZDBqMWt3TnBWOAo3bHkxTHVvbXA5WFdrVjNNNEt6KzBjQUZ2T1IrMmUwV0xPYitVV1dQR\
+  zFwTi9XQ3dFN3V0NGw2UGplZHBPM2NqCnE4dEFqN0hZMWZ2RkpDMEJEN3RJZTU3M0NGOEc5blJp\
+  MzQ3Y3BqM3FZVEwyVHpTT3plcDNKYlFSQno0PQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0t"
+  owner: root
+  path: /usr/local/share/ca-certificates/proxywg.crt
+  permissions: '0644'
+- encoding: b64
+  content: "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURxRENDQXBDZ0F3SUJBZ0lRZ\
+  FdabVpDQVYrTGxQOEp4YzZkTWtUVEFOQmdrcWhraUc5dzBCQVFzRkFEQkgKTVJNd0VRWUtDWklt\
+  aVpQeUxHUUJHUllEYm1WME1SY3dGUVlLQ1pJbWlaUHlMR1FCR1JZSFlXSjRMVzVsZERFWApNQlV\
+  HQTFVRUF4TU9RVUpZVGtWVUlGSnZiM1FnUTBFd0hoY05NRGt3TkRJeE1Ea3lNalE0V2hjTk16WX\
+  hNakV5Ck1Ea3dOelE0V2pCSE1STXdFUVlLQ1pJbWlaUHlMR1FCR1JZRGJtVjBNUmN3RlFZS0NaS\
+  W1pWlB5TEdRQkdSWUgKWVdKNExXNWxkREVYTUJVR0ExVUVBeE1PUVVKWVRrVlVJRkp2YjNRZ1Ew\
+  RXdnZ0VpTUEwR0NTcUdTSWIzRFFFQgpBUVVBQTRJQkR3QXdnZ0VLQW9JQkFRQ1QyTU8rd0MxazJ\
+  FS0tzN3UrV0ZrOXdlR241TC9ZR3FvcG5xMjFhU0pUCm0zQXoyYStCUkp3TUpYZ0xpbE52c1VmNk\
+  tSc2J6WTE0MjFJQy9OYzVRWHlzWkRSSVM2UWFFeVVLZmdkM2NyeEIKYTJiYkVJR3IySys0NnlTZ\
+  XlzMFFGWmVOUDBHZzRzVTJEK0FNWnFSeWQwazFCOWhpWFYxbHJYWmNMd3hWa09icgorbWt6Y1N0\
+  ZnJHWVBrdmE3aDJXMHFjRlJNM3I1ZzZyMzNYQ05OMDB3V2wydEJqNlF2c2tVd01pdjRzR1V2TjJ\
+  JCkZZVmJsSFB5SmVRQzJBSERvSElYdVo4TUpFSXowU0c1T1FsTVZTTm1yWUdnbXhxbWFQbElaZX\
+  I3Q1VKN2pvc2oKZkRQRmFUT3g2M3o3djB3UUNhTWd6RHlJTTNiMERLQ0lOWVBDS1lsam5oRlBBZ\
+  01CQUFHamdZOHdnWXd3RXdZSgpLd1lCQkFHQ054UUNCQVllQkFCREFFRXdEZ1lEVlIwUEFRSC9C\
+  QVFEQWdHR01BOEdBMVVkRXdFQi93UUZNQU1CCkFmOHdIUVlEVlIwT0JCWUVGSEdMRmcxekNlYXY\
+  zNnF3THY0ejI1a2NaRXNOTUJBR0NTc0dBUVFCZ2pjVkFRUUQKQWdFQk1DTUdDU3NHQVFRQmdqY1\
+  ZBZ1FXQkJRV2lTV2JEZ1E1WTZSM01IYWYveUlZWEIzS1V6QU5CZ2txaGtpRwo5dzBCQVFzRkFBT\
+  0NBUUVBQURRaDFnRmcvb0JhWHkzMy8zalpIaUNYd3BiekJzNEF0My9QS2k1cFNIZDlSS0ZDCm1K\
+  alZQdXB1Uys2akNPRTdKbjYxT1U2UHRDVHFzcWY4Z3pEeCtZNjg1RFAyR3lvc3NiMWJjS3l4L2F\
+  xaUxxRWgKcVoyUlFPUys4Uis2QjlteWJ4NUUvdzBOdXZnSFRycllXTStXRklHVzlVbk9wZlcyN0\
+  syK1JXMmpXSUkxT0ZIZgpTa3l1ajF6UFk5RHlFMUQra0o1MmhTdGZtMGlVbDV0TFdOY2VJMHd6T\
+  3kxeFM1SGw5OGo4enJwTUVWdTJrdWI3CkNEcmhPMVdKcXlEWkt5OXhuRmNKS2xrSWdlMEM5RjZt\
+  NDdkVDdReUZicmo5MVF4NE9ld3RnYzJ4WG5mTUQ3cHgKbnd5MDF4MHdKYkF6czg4WnQvRUl2M0p\
+  DWERXRE14ZHY5TC9MTXc9PQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg=="
+  owner: root
+  path: /usr/local/share/ca-certificates/abx_net_net_root_ca.crt
+  permissions: '0644'
+- encoding: b64
+  content: "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURzRENDQXBpZ0F3SUJBZ0lRZ\
+  mE2ZTAyT2RjWXBIa3dVdGRCL3JKREFOQmdrcWhraUc5dzBCQVFzRkFEQlkKTVJJd0VBWUtDWklt\
+  aVpQeUxHUUJHUllDWTJneEZ6QVZCZ29Ka2lhSmsvSXNaQUVaRmdkaFluSmhlR0Z6TVJNdwpFUVl\
+  LQ1pJbWlaUHlMR1FCR1JZRFltbGhNUlF3RWdZRFZRUURFd3RDU1VFZ1VtOXZkQ0JEUVRBZUZ3MH\
+  dPVEF4Ck1qQXhNakV4TkRoYUZ3MHpOakV5TURZeE16UTJORGxhTUZneEVqQVFCZ29Ka2lhSmsvS\
+  XNaQUVaRmdKamFERVgKTUJVR0NnbVNKb21UOGl4a0FSa1dCMkZpY21GNFlYTXhFekFSQmdvSmtp\
+  YUprL0lzWkFFWkZnTmlhV0V4RkRBUwpCZ05WQkFNVEMwSkpRU0JTYjI5MElFTkJNSUlCSWpBTkJ\
+  na3Foa2lHOXcwQkFRRUZBQU9DQVE4QU1JSUJDZ0tDCkFRRUF2aGFzWkRFRjQwaHQ5YVVJSGVrbk\
+  VHUU9oR1dpdzNHL1F6S0d6SkM4cWtOUnliNTlFeTBkWTJ6eWVXOEcKUzBCallzemRVUCt1aTBqU\
+  U0zVzVUU0FEOXVXS0VUYkVDcFdvamtQTzUxalR6cDlOR29WWFdEbzdqMEk1L1hwZgo1Nm04YVcw\
+  SjlGRkJZb3FYOFpIeVhZTTQ1NFZ2Z1YzZEhsbFd0bkFSQ2F2dUhyOVk4OUFucXFYZzMwVEEwZmR\
+  aCkhWZnoxT3dEMHo5T3htRWJmajdQQ0xoTVhnYWNYL1VWL1A3RTlIbVMzUk1hbW5DVkNKenNjY0\
+  hkM1p2RnBJTXgKSUQ3dEZnNU1VdHBrd0QwWW1MQ2RGcFRWdDlZRTJUcGtaMDZtTjg3OWg0QVFTZ\
+  kY1a1JVbFVEcHRuK2N1dnpCQQpvTUlMMi9OQ0JQcFpkVE5XbFRtTTJCdEJqUUlEQVFBQm8zWXdk\
+  REFMQmdOVkhROEVCQU1DQVlZd0R3WURWUjBUCkFRSC9CQVV3QXdFQi96QWRCZ05WSFE0RUZnUVV\
+  SdUJQc3VQaXR4UFcwMGFWMzBkNXJjUVc1REF3RUFZSkt3WUIKQkFHQ054VUJCQU1DQVFJd0l3WU\
+  pLd1lCQkFHQ054VUNCQllFRkpPUmVnYTl6N0VIem9SS3hRM05lb3BDT0JiVQpNQTBHQ1NxR1NJY\
+  jNEUUVCQ3dVQUE0SUJBUUNpaHJPRmJ4My8yTEJtMDJvSmk3dlBtZXFNMFZMY1puZFBTdDZPCnlV\
+  K0luV3pBc1FrWmdLWmUzNlRPNDNLa0pnQUZtTFkvditUTWx4QzhVVDdGUTJRZTV5bEZXWllkNld\
+  VQUZnQlgKZEJ5bldpcjl2azZKZloydUtLdUFzSk5nRXlnelpUSlVSZjJWdkhlWE95aFFVUWdVQn\
+  ppMFFsaHN6REN4Y0llVgpyNVBvRHlHZVlkUk54UllmSkVyUTIvMld3elVCNDE1QUxSanFjT0QrL\
+  0IyUy9Jdk8waGliWENKcndQUVdyZ0NBCkQra0tIUmpoSmorUFVnY1pVN3AzWlQwb2lVVFpwSnFt\
+  WVNvRVNLdEJDZm9FTmtNUVlJcXYzUzNzdzRvMUdVUmYKeEpiYVR2WkRGWURiMEN3L0R3TnhlVWJ\
+  OMk9KVFNhdGZQVnBoTVVxT2lDSFBEZkRsCi0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K"
+  owner: root
+  path: /usr/local/share/ca-certificates/bia_root_ca.crt
+  permissions: '0644'
+- path: /etc/issue
+  owner: root
+  permissions: '0644'
+  content: |
+    ##############################################################################
+    #                                                                            #
+    #             Unauthorized access to this system is prohibited !             #
+    #                                                                            #
+    #    This system is actively monitored and all connections may be logged.    #
+    #         By accessing this system, you consent to this monitoring.          #
+    #                                                                            #
+    ##############################################################################
+- path: /etc/custom-resolv.conf
+  owner: root
+  permissions: '0644'
+  content: |
+    nameserver 10.72.115.222
+    nameserver 10.73.115.222
+- path: /etc/sysctl.d/90-kubelet.conf
+  owner: root
+  permissions: '0644'
+  content: |
+    vm.overcommit_memory=1
+    kernel.panic=10
+    kernel.panic_on_oops=1
+
+%{ if template == "ubuntu-22.04-minimal-hardened" }
+- path: /var/lib/cloud/scripts/per-boot/resizelvm
+  owner: root
+  permissions: '0755'
+  content: |
+    #!/bin/sh
+    /usr/bin/growpart /dev/sda 3
+    /usr/sbin/pvresize -y -q /dev/sda3
+    /usr/sbin/lvresize -y -q -r -l +100%FREE /dev/mapper/ubuntu--vg-ubuntu--lv
+    /usr/sbin/resize2fs -fF /dev/mapper/ubuntu--vg-ubuntu--lv
+    exit 0
+%{ else }
+growpart:
+  mode: auto
+  devices: ["/"]
+  ignore_growroot_disabled: false
+%{ endif }
+
+%{ if length(bootcmds) != 0 }
+bootcmd: ${jsonencode(bootcmds)}
+%{ endif }
+
+runcmd:
+  - swapoff -a && sed -i '/swap/ s/^#*/#/' /etc/fstab
+  - sysctl -p /etc/sysctl.d/90-kubelet.conf
+  - update-ca-certificates
+  - sed -i 's/hostname=""/hostname="'`hostname --fqdn`'"/' /opt/node_exporter/vm_template_id.prom
+%{ for cmd in commands}
+  - ${cmd}
+%{ endfor}
+
+packages:
+  - nfs-common
+  - ca-certificates
+%{ for pkg in packages}
+  - ${pkg}
+%{ endfor}
+
+package_upgrade: true
+package_update: true
+
+salt_minion:
+  pkg_name: salt-minion
+  service_name: salt-minion
+  config_dir: /etc/salt
+  conf:
+    master: ${salt-master}
+    grains:
+      cluster: ${cluster}
+      site: %{ if is_dr_site }dr-site%{ else }main-site%{ endif }
+      stage: ${stage}
+      node-role: ${node-role}

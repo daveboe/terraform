@@ -1,0 +1,116 @@
+apiVersion: audit.k8s.io/v1
+kind: Policy
+rules:
+  - level: None
+    userGroups: ["system:serviceaccounts:kube-system"]
+  - level: None
+    # Do not log ArgoCD requests
+    userGroups: ["system:serviceaccounts:argocd"]
+    # Do not log kubeDB and stash serviceaccount requests
+  - level: None
+    users: ["system:serviceaccount:aap-system:kubedb-operator-kubedb-community","system:serviceaccount:aap-system:kubedb-operator-kubedb-enterprise","system:serviceaccount:aap-system:kubedb-operator-kubedb-autoscaler","system:serviceaccount:aap-system:stash-stash-enterprise"]
+    # Do not log requests on resource subjectaccessreviews
+  - level: None
+    resources:
+      - group: "authorization.k8s.io"
+        resource: ["subjectaccessreviews"]
+    # Do not log requests for updates on resource endpoint
+  - level: None
+    resources:
+      - group: "" # core
+        resource: ["endpoints"]
+    verbs: ["update"]
+  - level: None
+    # Ingress controller reads `configmaps/ingress-uid` through the unsecured port.
+    users: ["system:unsecured"]
+    namespaces: ["kube-system"]
+    verbs: ["get"]
+    resources:
+      - group: "" # core
+        resources: ["configmaps"]
+  - level: None
+    users: ["kubelet"] # legacy kubelet identity
+    verbs: ["get"]
+    resources:
+      - group: "" # core
+        resources: ["nodes"]
+  - level: None
+    userGroups: ["system:nodes"]
+    verbs: ["get", "patch"]
+    resources:
+      - group: "" # core
+        resources: ["nodes"]
+  - level: None
+    userGroups: ["system:nodes"]
+    verbs: ["get"]
+    resources:
+      - group: "" # core
+        resources: ["secrets"]
+  - level: None
+    users:
+      - system:kube-controller-manager
+      - system:kube-scheduler
+      - system:serviceaccount:kube-system:endpoint-controller
+    verbs: ["get", "update"]
+    namespaces: ["kube-system"]
+    resources:
+      - group: "" # core
+        resources: ["endpoints"]
+  - level: None
+    users: ["system:apiserver"]
+    verbs: ["get"]
+    resources:
+      - group: "" # core
+        resources: ["namespaces"]
+  # Don't log these read-only URLs.
+  - level: None
+    nonResourceURLs:
+      - /healthz*
+      - /version
+      - /openapi/v2*
+      - /readyz*
+      - /livez*
+  # Don't log events requests.
+  - level: None
+    resources:
+      - group: "" # core
+        resources: ["events"]
+      - group: "events.k8s.io"
+        resources: ["events"]
+  # Secrets, ConfigMaps, and TokenReviews can contain sensitive & binary data,
+  # so only log at the Metadata level.
+  - level: Metadata
+    resources:
+      - group: ""  # core
+        resources: ["secrets", "configmaps"]
+      - group: authentication.k8s.io
+        resources: ["tokenreviews"]
+  # Log pvc/pv requests to capture volume details
+  - level: Request
+    verbs: ["create", "delete", "update", "patch"]
+    resources:
+      - group: ""  # core
+        resources: ["persistentvolumeclaims", "persistentvolumes"]
+  # Log pod create requests to capture container images, etc.
+  - level: Request
+    verbs: ["create", "update", "patch"]
+    resources:
+      - group: ""  # core
+        resources: ["pods", "replicacontrollers", "container"]
+      - group: "apps"
+        resources: ["daemonsets", "deployments", "replicasets", "statefulsets"]
+      - group: "batch"
+        resources: ["jobs", "cronjobs"]
+  # Log changes to Cilium resources
+  - level: RequestResponse
+    verbs: ["create", "update", "delete", "patch"]
+    resources:
+      - group: cilium.io
+  # Excludes the following apigroups from logs
+  - level: None
+    resources:
+      - group: "apiregistration.k8s.io"
+      - group: "coordination.k8s.io"
+  # Get repsonses can be large; skip them.
+  - level: Metadata
+    verbs: ["create", "update", "delete", "patch"]
